@@ -61,7 +61,9 @@ const resolvers = {
         bookCount: () => Book.collection.countDocuments(),
         authorCount: () => Author.collection.countDocuments(),
         allBooks: (root, args) => {
-            return Book.find({})
+            const findProps = {}
+            if (args.genre) findProps.genres = { $in: [args.genre] }
+            return Book.find(findProps)
         },
         allAuthors: (root, args) => {
             return Author.find({})
@@ -77,8 +79,10 @@ const resolvers = {
             const book = new Book({...args, author: author._id})
             return book.save()
         },
-        editAuthor: (root, args) => {
-            return null
+        editAuthor: async (root, args) => {
+            const author = await Author.findOne({name: args.name})
+            author.born = args.setBornTo
+            return author.save()
         }
     }
 }
