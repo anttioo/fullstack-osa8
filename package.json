@@ -19,6 +19,7 @@
   "homepage": "https://github.com/anttioo/fullstack-osa8#readme",
   "dependencies": {
     "apollo-server": "^2.23.0",
-    "graphql": "^15.5.0"
+    "graphql": "^15.5.0",
+    "uuid": "^8.3.2"
   }
 }
