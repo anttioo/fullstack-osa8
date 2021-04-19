@@ -6,7 +6,6 @@ const ALL_BOOKS = gql`
     allBooks{
       title
       published
-      author
       id
   }
 }
@@ -16,7 +15,7 @@ const Books = (props) => {
   const result = useQuery(ALL_BOOKS)
   if (!props.show) return null
   if (result.loading) return <div>loading...</div>
-
+  console.log(result)
   const books = result.data.allBooks
 
   return (
