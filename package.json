@@ -1,0 +1,24 @@
+{
+  "name": "fullstack-osa8",
+  "version": "1.0.0",
+  "description": "fullstack-osa8",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/anttioo/fullstack-osa8.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/anttioo/fullstack-osa8/issues"
+  },
+  "homepage": "https://github.com/anttioo/fullstack-osa8#readme",
+  "dependencies": {
+    "apollo-server": "^2.23.0",
+    "graphql": "^15.5.0"
+  }
+}
