@@ -4,6 +4,7 @@ import {gql, useMutation, useLazyQuery} from '@apollo/client'
 const ALL_AUTHORS = gql`
   query{
     allAuthors{
+      id
       name
       born
       bookCount
@@ -32,6 +33,9 @@ const Authors = (props) => {
     const [name, setName] = useState("")
     const [born, setBorn] = useState("")
     const [authors, setAuthors] = useState([])
+    const [selectedAuthor, setSelectedAuthor] = useState("")
+
+    useEffect(() => getResult(), [])
 
     useEffect(() => {
         if (result.data) setAuthors(result.data.allAuthors)
@@ -42,7 +46,7 @@ const Authors = (props) => {
 
     const handleUpdateBorn = async e => {
         e.preventDefault()
-        await updateBorn({variables: {name, born: parseInt(born)}})
+        await updateBorn({variables: {name: authors.filter(author => author.id === selectedAuthor)[0].name, born: parseInt(born)}})
         setName("")
         setBorn("")
         getResult()
@@ -74,7 +78,12 @@ const Authors = (props) => {
             </table>
             <h2>Set BirthYear</h2>
             <div>
-                <input type="text" placeholder="Name" value={name} onChange={e => setName(e.target.value)}/>
+                <select value={selectedAuthor} onChange={e => setSelectedAuthor(e.target.value)}>
+                    <option value="" disabled>Select author</option>
+                    { authors.map( author => (
+                        <option key={author.id} value={author.id}>{author.name}</option>
+                    ))}
+                </select>
             </div>
             <div>
                 <input type="number" placeholder="Born" value={born} onChange={e => setBorn(e.target.value)}/>
